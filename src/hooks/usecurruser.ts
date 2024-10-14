@@ -9,7 +9,7 @@ export function useCurrentUser() {
         try {
             const response = await fetch("/api/curruser", {
                 method: "GET",
-                credentials: "include", // Ensure cookies are sent with the request
+                credentials: "include",
             });
 
             const data = await response.json();

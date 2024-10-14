@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
 
         let decoded;
         try {
-            decoded = jwt.verify(token.value, JWT_SECRET); // Adjusting for token.value
+            decoded = jwt.verify(token.value, JWT_SECRET);
         } catch (error) {
             return NextResponse.json({ message: "Invalid or expired session", error }, { status: 401 });
         }

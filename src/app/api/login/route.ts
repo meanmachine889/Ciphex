@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 import { serialize } from "cookie";
 
 const prisma = new PrismaClient();
-const JWT_SECRET = "your-secret-key"; // Replace this with a secure key
+const JWT_SECRET = "your-secret-key";
 
 export async function POST(req: NextRequest) {
     try {

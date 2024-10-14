@@ -1,6 +1,6 @@
 "use client";
 
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import {useRouter, usePathname} from "next/navigation";
 import {useCurrentUser} from "@/hooks/usecurruser";
 import {Loader2} from "lucide-react";
