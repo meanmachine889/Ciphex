@@ -19,7 +19,7 @@ export function useCurrentUser() {
                 setCurrentUser(data.user);
                 return { success: true, message: data.user.username };
             } else {
-                return { success: false, message: "Error fetching user data." };
+                return { success: false, message: "Please login to proceed" };
             }
         } catch (error) {
             setLoading(false);

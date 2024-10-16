@@ -5,13 +5,9 @@ import {Button} from "@/components/ui/button"
 import {Input} from "@/components/ui/input"
 import {Label} from "@/components/ui/label"
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card"
-import {Upload} from "lucide-react"
+import {Download, Upload} from "lucide-react"
 
-interface LandingProps {
-    name: string
-}
-
-export default function Landing({name}: LandingProps) {
+export default function Landing() {
     const [coverFileName, setCoverFileName] = useState<string | null>(null)
     const [sensitiveFileName, setSensitiveFileName] = useState<string | null>(null)
     const [key, setKey] = useState("")
@@ -35,7 +31,7 @@ export default function Landing({name}: LandingProps) {
                         <Label htmlFor="key" className="text-sm font-medium text-gray-300">
                             Key
                         </Label>
-                        <input
+                        <Input
                             id="key"
                             type="text"
                             placeholder="Enter your key"
@@ -88,7 +84,10 @@ export default function Landing({name}: LandingProps) {
                             </Button>
                         </div>
                     </div>
-                    <Button className={""}>Encrypt</Button>
+                    <div className={"flex justify-between"}>
+                        <Button className={""}>Encrypt</Button>
+                        <Button className={"gap-3"} variant={"outline"} disabled={true}>Download <Download size={15}/></Button>
+                    </div>
                 </CardContent>
             </Card>
         </div>

@@ -20,16 +20,16 @@ import { useState } from "react";
 import { useSignup } from "@/hooks/useSignup";
 import { useLogin } from "@/hooks/useLogin";
 import { useToast } from "@/hooks/use-toast";
-import { useCurrentUser } from "@/hooks/usecurruser";
+import { useRouter } from "next/navigation";
 
 export function AuthPage() {
+    const router = useRouter();
     const { toast } = useToast();
     const [signupData, setSignupData] = useState({ name: "", username: "", password: "" });
     const [loginData, setLoginData] = useState({ username: "", password: "" });
 
     const { signup, loading: signupLoading } = useSignup();
     const { login, loading: loginLoading } = useLogin();
-    const { fetchCurrentUser, loading: userLoading } = useCurrentUser();
 
     const handleSignup = async () => {
         const { name, username, password } = signupData;
@@ -42,7 +42,7 @@ export function AuthPage() {
                 });
             } else {
                 toast({
-                    title: "Error",
+                    title: "Unauthorized",
                     description: result.message,
                 });
             }
@@ -62,7 +62,11 @@ export function AuthPage() {
                 toast({
                     title: "Success",
                     description: result.message,
+                    duration: 3
                 });
+
+                router.push("/");
+
             } else {
                 toast({
                     title: "Error",
@@ -77,23 +81,8 @@ export function AuthPage() {
         }
     };
 
-    const handleUser = async () => {
-        const result = await fetchCurrentUser();
-        if (result.success) {
-            toast({
-                title: "Success",
-                description: result.message,
-            });
-        } else {
-            toast({
-                title: "Error",
-                description: result.message,
-            });
-        }
-    };
-
     return (
-        <>
+        <div className={"w-[100%] min-h-[100vh] flex items-center justify-center md:px-0 px-3"}>
             <Tabs defaultValue="login" className="w-[400px]">
                 <TabsList className="grid w-full grid-cols-2">
                     <TabsTrigger value="login">Login</TabsTrigger>
@@ -177,9 +166,6 @@ export function AuthPage() {
                     </Card>
                 </TabsContent>
             </Tabs>
-            <Button onClick={handleUser} disabled={userLoading}>
-                {userLoading ? "Loading..." : "Get Current User"}
-            </Button>
-        </>
+        </div>
     );
 }

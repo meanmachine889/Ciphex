@@ -25,6 +25,7 @@ export default function Home() {
                     toast({
                         title: "Success",
                         description: `Welcome, ${result.message}!`,
+                        duration: 3
                     });
                 } else {
                     throw new Error(result.message);
@@ -53,9 +54,9 @@ export default function Home() {
     return (
         <div>
             {currentUser ? (
-                <div className={"flex flex-col h-[100vh] w-[100%]"}>
+                <div className={"flex flex-col h-[100vh] w-[100%] font-[family-name:var(--font-geist-mono)]"}>
                     <NavBar name={currentUser} />
-                    <Landing name={currentUser}/>
+                    <Landing />
                 </div>
             ) : null}
         </div>
