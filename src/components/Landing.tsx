@@ -1,95 +1,31 @@
 "use client"
 
-import React, {useState} from "react"
-import {Button} from "@/components/ui/button"
-import {Input} from "@/components/ui/input"
-import {Label} from "@/components/ui/label"
-import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card"
-import {Download, Upload} from "lucide-react"
+import React from "react"
+import {Encryption1} from "@/components/encryption1";
+import {
+    Tabs,
+    TabsContent,
+    TabsList,
+    TabsTrigger,
+} from "@/components/ui/tabs";
+import {Decryption1} from "@/components/Decryption1";
 
 export default function Landing() {
-    const [coverFileName, setCoverFileName] = useState<string | null>(null)
-    const [sensitiveFileName, setSensitiveFileName] = useState<string | null>(null)
-    const [key, setKey] = useState("")
-
-    const handleFileChange = (
-        event: React.ChangeEvent<HTMLInputElement>,
-        setFileName: React.Dispatch<React.SetStateAction<string | null>>
-    ) => {
-        const file = event.target.files?.[0]
-        setFileName(file ? file.name : null)
-    }
 
     return (
         <div className="flex items-start justify-start min-h-screen p-4 px-9">
-            <Card className="w-full max-w-md border-gray-700 ">
-                <CardHeader className={"border-b border-gray-700"}>
-                    <CardTitle className={"font-medium text-gray-500"}>Encryption</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-6 py-5">
-                    <div className="space-y-2">
-                        <Label htmlFor="key" className="text-sm font-medium text-gray-300">
-                            Key
-                        </Label>
-                        <Input
-                            id="key"
-                            type="text"
-                            placeholder="Enter your key"
-                            value={key}
-                            onChange={(e) => setKey(e.target.value)}
-                            className="w-full border-gray-700 rounded-lg bg-transparent border p-3 text-white placeholder-gray-500"
-                        />
-                    </div>
-                    <div className="space-y-2">
-                        <Label htmlFor="cover" className="text-sm font-medium text-gray-300">
-                            Cover File
-                        </Label>
-                        <div className="flex items-center gap-2">
-                            <input
-                                id="cover"
-                                type="file"
-                                className="sr-only"
-                                onChange={(e) => handleFileChange(e, setCoverFileName)}
-                                accept="image/*"
-                            />
-                            <Button
-                                variant="outline"
-                                className="w-full justify-start items-center text-gray-500 py-6 hover:bg-gray-700 border-gray-700"
-                                onClick={() => document.getElementById('cover')?.click()}
-                            >
-                                <Upload className="mr-2 h-4 w-4"/>
-                                {coverFileName || "Choose File"}
-                            </Button>
-                        </div>
-                    </div>
-                    <div className="space-y-2">
-                        <Label htmlFor="sensitive" className="text-sm font-medium text-gray-300">
-                            Sensitive File
-                        </Label>
-                        <div className="flex items-center gap-2">
-                            <input
-                                id="sensitive"
-                                type="file"
-                                className="sr-only"
-                                onChange={(e) => handleFileChange(e, setSensitiveFileName)}
-                                accept="image/*"
-                            />
-                            <Button
-                                variant="outline"
-                                className="w-full justify-start items-center text-gray-500 hover:bg-gray-700 py-6 border-gray-700"
-                                onClick={() => document.getElementById('sensitive')?.click()}
-                            >
-                                <Upload className="mr-2 h-4 w-4"/>
-                                {sensitiveFileName || "Choose File"}
-                            </Button>
-                        </div>
-                    </div>
-                    <div className={"flex justify-between"}>
-                        <Button className={""}>Encrypt</Button>
-                        <Button className={"gap-3"} variant={"outline"} disabled={true}>Download <Download size={15}/></Button>
-                    </div>
-                </CardContent>
-            </Card>
+            <Tabs defaultValue="Encryption" className="w-[400px]">
+                <TabsList className="grid w-full grid-cols-2">
+                    <TabsTrigger value="Encryption">Encryption</TabsTrigger>
+                    <TabsTrigger value="Decryption">Decryption</TabsTrigger>
+                </TabsList>
+                <TabsContent value="Encryption">
+                    <Encryption1/>
+                </TabsContent>
+                <TabsContent value="Decryption">
+                    <Decryption1/>
+                </TabsContent>
+            </Tabs>
         </div>
     )
 }
