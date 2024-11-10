@@ -4,12 +4,15 @@ import { useEffect, useState } from 'react';
 import { useCurrentUser } from '@/hooks/usecurruser';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
-import Landing from '@/components/Landing'
 import {Loader2} from "lucide-react";
 import {NavBar} from "@/components/navbar";
+import ImageComponent from '@/components/ImageComponent';
+import Audio from '@/components/Audio';
+import Video from '@/components/Video';
 
 export default function Home() {
     const [currentUser, setCurrentUser] = useState<string | null>(null);
+    const [page, setPage] = useState<string>("Image");
     const [loading, setLoading] = useState(true);
     const { toast } = useToast();
     const { fetchCurrentUser } = useCurrentUser();
@@ -51,12 +54,18 @@ export default function Home() {
         </div>;
     }
 
+    
+
     return (
         <div>
             {currentUser ? (
-                <div className={"flex flex-col h-[100vh] w-[100%] font-[family-name:var(--font-geist-mono)]"}>
-                    <NavBar name={currentUser} />
-                    <Landing />
+                <div className={"flex jutify-between w-[100%] bg-gradient-to-r from-[#19182a] to-[#24182a] font-[family-name:var(--font-geist-mono)]"}>
+                    <NavBar name={currentUser} setFunction={setPage} page={page} />
+                    <div className='h-[100vh] flex-1 items-center justify-center flex p-3 py-5'>
+                        <div className='h-[100%] rounded-xl shadow-xl w-[100%] flex bg-gradient-to-r from-[#292435] to-[#312435]'>
+                            {page === "Image" ? (<ImageComponent />) : page === "Audio" ? (<Audio />) : page === "Video" ? (<Video />) : null}
+                        </div>
+                    </div>
                 </div>
             ) : null}
         </div>

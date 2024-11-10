@@ -13,7 +13,7 @@ import {Decryption1} from "@/components/Decryption1";
 export default function Landing() {
 
     return (
-        <div className="flex items-start justify-start min-h-screen p-4 px-9">
+        <div className="flex h-[30rem] items-start justify-center p-4 px-9">
             <Tabs defaultValue="Encryption" className="w-[400px]">
                 <TabsList className="grid w-full grid-cols-2">
                     <TabsTrigger value="Encryption">Encryption</TabsTrigger>
