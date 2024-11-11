@@ -50,19 +50,19 @@ export default function Home() {
 
     if (loading) {
         return (
-            <div className={"w-[100%] h-[100vh] flex items-center justify-center"}>
-                <Loader2 size={40} className={"animate-spin text-gray-400"} />
+            <div className="container h-screen flex items-center justify-center">
+                <Loader2 size={40} className="animate-spin text-gray-400" />
             </div>
         );
     }
 
     return (
-        <div>
+        <div className="min-h-screen w-full overflow-x-hidden">
             {currentUser ? (
-                <div className={"flex justify-between w-[100%] bg-gradient-to-r from-[#19182a] to-[#24182a] font-[family-name:var(--font-geist-mono)]"}>
+                <div className="flex w-full min-h-screen bg-gradient-to-r from-[#19182a] to-[#24182a] font-[family-name:var(--font-geist-mono)]">
                     <NavBar name={currentUser} setFunction={setPage} page={page} />
-                    <div className='h-[100vh] flex-1 items-center justify-center flex p-3 py-5'>
-                        <div className='h-[100%] rounded-xl shadow-xl w-[100%] flex bg-gradient-to-r from-[#292435] to-[#312435]'>
+                    <div className="flex-1 w-full flex items-center justify-center p-3 py-5">
+                        <div className="w-full max-w-screen-lg h-full overflow-y-auto rounded-xl shadow-xl bg-gradient-to-r from-[#292435] to-[#312435]">
                             {page === "Image" ? (
                                 <ImageComponent />
                             ) : page === "Audio" ? (

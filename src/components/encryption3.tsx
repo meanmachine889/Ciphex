@@ -95,7 +95,7 @@ export function Encryption1() {
 
           <div className="space-y-2">
             <Label htmlFor="cover" className="text-sm font-medium text-[#9d83ab]">
-              Cover File (Video)
+              Cover File (.mp4)
             </Label>
             <div className="flex items-center gap-2">
               <input

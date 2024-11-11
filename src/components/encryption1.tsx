@@ -59,8 +59,8 @@ export function Encryption1() {
   };
 
   return (
-    <div className="w-[80vw] h-[100%] pt-2">
-      <div className="flex max-w-[90%] mt-2 bg-[#24182a] p-3 rounded-xl border border-[#5f476b] text-[#9d83ab]">
+    <div className="w-[100%] h-[100%] pt-2">
+      <div className="flex w-[100%] mt-2 bg-[#24182a] p-3 rounded-xl border border-[#5f476b] text-[#9d83ab]">
         To encode a message into an image, choose the image you want to use,
         enter your text and hit the Encode button.
         <br /> Save the last image, it will contain your hidden message.
@@ -79,7 +79,7 @@ export function Encryption1() {
             </Label>
             <Input
               id="key"
-              type="text"
+              type="password"
               placeholder="Enter your key"
               value={key}
               onChange={(e) => setKey(e.target.value)}
