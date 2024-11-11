@@ -12,17 +12,49 @@ export function Decryption1() {
     null
   );
   const [key, setKey] = useState("");
+  const [sensitiveFile, setSensitiveFile] = useState<File | null>(null);
+  const [decryptedText, setDecryptedText] = useState<string | null>(null);
 
   const handleFileChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    setFileName: React.Dispatch<React.SetStateAction<string | null>>
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const file = event.target.files?.[0];
-    setFileName(file ? file.name : null);
+    setSensitiveFile(file || null);
+    setSensitiveFileName(file ? file.name : null);
   };
+
+  const handleDecrypt = async () => {
+    if (!sensitiveFile || !key) {
+      alert("Please fill in all fields and select a file.");
+      return;
+    }
+  
+    const formData = new FormData();
+    formData.append("video_file", sensitiveFile);
+    formData.append("password", key);
+  
+    try {
+      const response = await fetch("http://localhost:8000/video_txt/decode/", {
+        method: "POST",
+        body: formData,
+      });
+  
+      if (!response.ok) {
+        throw new Error("Decryption failed.");
+      }
+  
+      const result = await response.json();
+      setDecryptedText(result.extracted_text); 
+    } catch (error) {
+      console.error("Decryption failed:", error);
+      alert("Decryption failed. Please try again.");
+    }
+  };
+  
+
   return (
     <div className="min-w-[80vw] h-[100%] pt-2">
-      <div className="flex min-w-[100%] mt-2 bg-[#24182a] p-3 rounded-xl border border-[#5f476b] text-[#9d83ab]">
+      <div className="flex max-w-[90%] mt-2 bg-[#24182a] p-3 rounded-xl border border-[#5f476b] text-[#9d83ab]">
         To decode a hidden message from an image, just choose an image and hit
         the Decode button.
         <br />
@@ -58,8 +90,8 @@ export function Decryption1() {
                 id="sensitive"
                 type="file"
                 className="sr-only"
-                onChange={(e) => handleFileChange(e, setSensitiveFileName)}
-                accept="image/*"
+                onChange={handleFileChange}
+                accept="video/*"
               />
               <Button
                 variant="ghost"
@@ -71,9 +103,19 @@ export function Decryption1() {
               </Button>
             </div>
           </div>
-          <div className={"flex justify-between"}>
-            <Button className={"bg-[#9d83ab]"}>Decrypt</Button>
+
+          <div className="flex justify-between">
+            <Button onClick={handleDecrypt} className="bg-[#9d83ab]">
+              Decrypt
+            </Button>
           </div>
+
+          {decryptedText && (
+            <div className="mt-4 p-4 bg-[#24182a] text-[#9d83ab] rounded-lg">
+              <Label className="text-sm font-medium text-[#9d83ab]">Decrypted Text</Label>
+              <p className="text-white">{decryptedText}</p>
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>

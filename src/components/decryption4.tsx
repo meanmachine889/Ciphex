@@ -29,12 +29,11 @@ export function Decryption1() {
     }
 
     const formData = new FormData();
-    formData.append("audio_file", file);
+    formData.append("exe_file", file);
     formData.append("password", key);
 
     try {
-      // Send the request to the backend
-      const response = await fetch("http://localhost:8000/audio_txt/decode/", {
+      const response = await fetch("http://localhost:8000/exe_txt/decode/", {
         method: "POST",
         body: formData,
       });
@@ -43,10 +42,12 @@ export function Decryption1() {
         throw new Error("Decryption failed.");
       }
 
-      const data = await response.json();
-      setDecryptedText(data.extracted_text); 
+      const data = await response.json(); // Assuming the server returns decrypted text in JSON format
+
+      // Set decrypted text to display in the box
+      setDecryptedText(data.extracted_text || "Decryption failed. Please check your file and key.");
     } catch (error) {
-      console.error("Error decrypting text:", error);
+      console.error("Error decrypting file:", error);
       setDecryptedText("Decryption failed. Please check your file and key.");
     }
   };
@@ -54,12 +55,9 @@ export function Decryption1() {
   return (
     <div className="min-w-[80vw] h-[100%] pt-2">
       <div className="flex max-w-[90%] mt-2 bg-[#24182a] p-3 rounded-xl border border-[#5f476b] text-[#9d83ab]">
-        To decode a hidden message from an image, just choose an image and hit
-        the Decode button.
+        To decode a hidden message from an encrypted file, choose the encrypted file and provide the key to decode it.
         <br />
-        Neither the image nor the message that has been hidden will be at any
-        moment transmitted over the web, all the magic happens within your
-        browser.
+        Neither the file nor the hidden message will be transmitted over the web. Everything happens securely within your browser.
       </div>
       <Card className="w-full max-w-md mt-5 border-gray-700 bg-[#151423] border-none shadow-sm">
         <CardContent className="space-y-6 py-5">
@@ -80,8 +78,7 @@ export function Decryption1() {
           <div className="space-y-2">
             <Label
               htmlFor="sensitive"
-              className="text-sm font-medium text-[#9d83ab]"
-            >
+              className="text-sm font-medium text-[#9d83ab]">
               Encrypted File
             </Label>
             <div className="flex items-center gap-2">
@@ -90,7 +87,7 @@ export function Decryption1() {
                 type="file"
                 className="sr-only"
                 onChange={(e) => handleFileChange(e, setSensitiveFileName)}
-                accept="audio/*"
+                accept=".exe"
               />
               <Button
                 variant="ghost"
@@ -102,15 +99,15 @@ export function Decryption1() {
               </Button>
             </div>
           </div>
-          <div className={"flex justify-between"}>
-            <Button className={"bg-[#9d83ab]"} onClick={handleDecrypt}>
+          <div className="flex justify-between">
+            <Button className="bg-[#9d83ab]" onClick={handleDecrypt}>
               Decrypt
             </Button>
           </div>
 
           {decryptedText && (
             <div className="mt-4 p-4 bg-[#24182a] text-[#9d83ab] rounded-lg">
-              <Label className="text-sm font-medium text-[#9d83ab]">Decrypted Text</Label>
+              <Label className="text-sm font-medium text-[#9d83ab]">Decryption Result</Label>
               <p className="text-white">{decryptedText}</p>
             </div>
           )}

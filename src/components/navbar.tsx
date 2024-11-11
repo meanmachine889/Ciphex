@@ -1,7 +1,7 @@
 import React from "react";
 import Avatar from "boring-avatars";
 import { Button } from "@/components/ui/button";
-import { FileMusic, FileVideo, Image } from "lucide-react";
+import { FileMusic, FileVideo, Image, File } from "lucide-react";  // Import the File icon for "Exe"
 
 interface NavParams {
   name: string;
@@ -29,7 +29,7 @@ export const NavBar: React.FC<NavParams> = (props) => {
         variant={"ghost"}
         onClick={() => props.setFunction("Image")}
         className={
-          `text-md px-2 flex justify-start gap-3 items-center w-full hover:bg-[#242233] hover:text-[#4e4b56]  mt-1 ${props.page === "Image" ? "bg-[#242233] text-[#bbb0d3]" : "text-[#4e4b56]"}`
+          `text-md px-2 flex justify-start gap-3 items-center w-full hover:bg-[#242233] hover:text-[#4e4b56]  mt-1 ${props.page === "Image" ? "bg-[#242233] text-[#bbb0d3]" : "text-[#4e4b56]"}` 
         }
       >
         <Image /> Image{" "}
@@ -49,6 +49,13 @@ export const NavBar: React.FC<NavParams> = (props) => {
       >
         {" "}
         <FileVideo /> Video
+      </Button>
+      <Button
+        variant={"ghost"}
+        onClick={() => props.setFunction("Exe")}
+        className={`text-md px-2 flex justify-start gap-3 items-center w-full hover:bg-[#242233] hover:text-[#4e4b56]  mt-1 ${props.page === "Exe" ? "bg-[#242233] text-[#bbb0d3]" : "text-[#4e4b56]"}`}
+      >
+        <File /> Exe
       </Button>
     </div>
   );
