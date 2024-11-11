@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,10 +6,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Upload } from "lucide-react";
 
 export function Decryption1() {
-  const [sensitiveFileName, setSensitiveFileName] = useState<string | null>(
-    null
-  );
+  const [sensitiveFileName, setSensitiveFileName] = useState<string | null>(null);
   const [key, setKey] = useState("");
+  const [decodedText, setDecodedText] = useState<string | null>(null);
 
   const handleFileChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -20,9 +17,42 @@ export function Decryption1() {
     const file = event.target.files?.[0];
     setFileName(file ? file.name : null);
   };
+
+  const handleDecrypt = async () => {
+    const fileInput = document.getElementById("sensitive") as HTMLInputElement;
+    const file = fileInput.files?.[0];
+
+    if (!file || !key) {
+      alert("Please provide both the key and the encrypted file.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("password", key);
+
+    try {
+      const response = await fetch("http://localhost:8000/img_text/decode/", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to decrypt the file.");
+      }
+
+      const data = await response.json();
+      setDecodedText(data.decoded_text);
+      alert("File decrypted successfully!");
+    } catch (error) {
+      console.error(error);
+      alert("An error occurred during decryption.");
+    }
+  };
+
   return (
     <div className="min-w-[80vw] h-[100%] pt-2">
-      <div className="flex min-w-[100%] mt-2 bg-[#24182a] p-3 rounded-xl border border-[#5f476b] text-[#9d83ab]">
+      <div className="flex max-w-[90%] mt-2 bg-[#24182a] p-3 rounded-xl border border-[#5f476b] text-[#9d83ab]">
         To decode a hidden message from an image, just choose an image and hit
         the Decode button.
         <br />
@@ -72,8 +102,16 @@ export function Decryption1() {
             </div>
           </div>
           <div className={"flex justify-between"}>
-            <Button className={"bg-[#9d83ab]"}>Decrypt</Button>
+            <Button className={"bg-[#9d83ab]"} onClick={handleDecrypt}>
+              Decrypt
+            </Button>
           </div>
+          {decodedText && (
+            <div className="mt-4 p-4 bg-[#24182a] text-[#9d83ab] rounded-lg">
+              <Label className="text-sm font-medium text-[#9d83ab]">Decrypted Text</Label>
+              <p className="text-white">{decodedText}</p>
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>
