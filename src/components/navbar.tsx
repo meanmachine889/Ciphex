@@ -55,7 +55,7 @@ export const NavBar: React.FC<NavParams> = (props) => {
         onClick={() => props.setFunction("Exe")}
         className={`text-md px-2 flex justify-start gap-3 items-center w-full hover:bg-[#242233] hover:text-[#4e4b56]  mt-1 ${props.page === "Exe" ? "bg-[#242233] text-[#bbb0d3]" : "text-[#4e4b56]"}`}
       >
-        <File /> Exe
+        <File /> EXE
       </Button>
     </div>
   );
