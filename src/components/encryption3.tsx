@@ -27,7 +27,7 @@ export function Encryption1() {
       return;
     }
 
-    setLoading(true); // Start loading
+    setLoading(true); 
 
     const formData = new FormData();
     formData.append("video_file", coverFile);
