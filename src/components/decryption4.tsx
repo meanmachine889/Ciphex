@@ -44,7 +44,6 @@ export function Decryption1() {
 
       const data = await response.json(); // Assuming the server returns decrypted text in JSON format
 
-      // Set decrypted text to display in the box
       setDecryptedText(data.extracted_text || "Decryption failed. Please check your file and key.");
     } catch (error) {
       console.error("Error decrypting file:", error);
@@ -53,8 +52,8 @@ export function Decryption1() {
   };
 
   return (
-    <div className="min-w-[80vw] h-[100%] pt-2">
-      <div className="flex max-w-[90%] mt-2 bg-[#24182a] p-3 rounded-xl border border-[#5f476b] text-[#9d83ab]">
+    <div className="w-[100%] h-[100%] pt-2">
+      <div className="flex w-[100%] mt-2 bg-[#24182a] p-3 rounded-xl border border-[#5f476b] text-[#9d83ab]">
         To decode a hidden message from an encrypted file, choose the encrypted file and provide the key to decode it.
         <br />
         Neither the file nor the hidden message will be transmitted over the web. Everything happens securely within your browser.

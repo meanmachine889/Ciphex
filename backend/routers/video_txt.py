@@ -64,8 +64,6 @@ def embed_text_in_video(video_path, text, password, output_path):
             temp_video.write(encrypted_length)
             temp_video.write(encrypted_text)
 
-        print(f"Encrypted video written to {temp_video.name}, size: {os.path.getsize(temp_video.name)} bytes")
-
     return temp_video.name
 
 

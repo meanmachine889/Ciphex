@@ -7,13 +7,13 @@ import { Decryption1 } from "@/components/decryption4";
 
 export default function Audio() {
   return (
-    <div className="flex h-[30rem] items-start justify-center p-4 px-9">
-      <Tabs defaultValue="Encryption" className="w-[400px]">
-        <TabsList className="grid w-full grid-cols-2 bg-[#19182a] min-h-fit min-w-fit p-3 py-2">
+    <div className="flex h-auto w-[100%] flex-wrap items-start justify-start p-4 px-9 overflow-hidden">
+      <Tabs defaultValue="Encryption" className="w-full ">
+        <TabsList className="grid max-w-md w-full grid-cols-2 bg-[#19182a] min-h-fit min-w-fit p-3 py-2">
           <TabsTrigger value="Encryption">Encryption</TabsTrigger>
           <TabsTrigger value="Decryption">Decryption</TabsTrigger>
         </TabsList>
-        <TabsContent value="Encryption">
+        <TabsContent className="w-[100%]" value="Encryption">
           <Encryption1 />
         </TabsContent>
         <TabsContent value="Decryption">

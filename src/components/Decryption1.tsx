@@ -51,8 +51,8 @@ export function Decryption1() {
   };
 
   return (
-    <div className="min-w-[80vw] h-[100%] pt-2">
-      <div className="flex max-w-[90%] mt-2 bg-[#24182a] p-3 rounded-xl border border-[#5f476b] text-[#9d83ab]">
+    <div className="w-[100%] h-[100%] pt-2">
+      <div className="flex w-[100%] mt-2 bg-[#24182a] p-3 rounded-xl border border-[#5f476b] text-[#9d83ab]">
         To decode a hidden message from an image, just choose an image and hit
         the Decode button.
         <br />

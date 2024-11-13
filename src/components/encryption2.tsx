@@ -56,8 +56,8 @@ export function Encryption1() {
   };
 
   return (
-    <div className="min-w-[80vw] h-[100%] pt-2">
-      <div className="flex max-w-[90%] mt-2 bg-[#24182a] p-3 rounded-xl border border-[#5f476b] text-[#9d83ab]">
+    <div className="w-[100%] h-[100%] pt-2">
+      <div className="flex w-[100%] mt-2 bg-[#24182a] p-3 rounded-xl border border-[#5f476b] text-[#9d83ab]">
         To encode a message into an audio file, choose the file you want to use,
         enter your text, and hit the Encode button.
         <br /> Save the audio file, as it will contain your hidden message.
@@ -95,7 +95,7 @@ export function Encryption1() {
 
           <div className="space-y-2">
             <Label htmlFor="cover" className="text-sm font-medium text-[#9d83ab]">
-              Cover File
+              Cover File (.wav)
             </Label>
             <div className="flex items-center gap-2">
               <input
