@@ -49,20 +49,29 @@ def embed_text_in_exe(exe_path, text, password, output_path):
     encrypted_text = encrypt_text(text, password)
     encrypted_length = struct.pack('I', len(encrypted_text))
 
+    marker = b"ENCRYPTED_TEXT_START"
+
     with open(exe_path, 'rb') as exe:
         exe_data = exe.read()
 
     with open(output_path, 'wb') as exe_out:
-        exe_out.write(encrypted_length)
-        exe_out.write(encrypted_text)
-        exe_out.write(exe_data)
+        exe_out.write(exe_data)  
+        exe_out.write(marker)  
+        exe_out.write(encrypted_length)  
+        exe_out.write(encrypted_text)  
+
 
 def extract_text_from_exe(encrypted_exe, password):
+    marker = b"ENCRYPTED_TEXT_START"
     with open(encrypted_exe, "rb") as exe:
         exe_data = exe.read()
 
-    encrypted_length = struct.unpack('I', exe_data[:4])[0]
-    encrypted_data = exe_data[4:4 + encrypted_length]
+    marker_index = exe_data.rfind(marker)
+    if marker_index == -1:
+        raise ValueError("Marker not found. The file might be corrupted or not properly encoded.")
+
+    encrypted_length = struct.unpack('I', exe_data[marker_index + len(marker): marker_index + len(marker) + 4])[0]
+    encrypted_data = exe_data[marker_index + len(marker) + 4 : marker_index + len(marker) + 4 + encrypted_length]
 
     try:
         decrypted_text = decrypt_text(encrypted_data, password)
@@ -70,6 +79,7 @@ def extract_text_from_exe(encrypted_exe, password):
     except Exception as e:
         print("Error decoding decrypted text:", e)
         return None
+
 
 
 @router.post("/encode/")  

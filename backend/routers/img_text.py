@@ -10,7 +10,6 @@ from io import BytesIO
 from starlette.responses import StreamingResponse
 from fastapi import APIRouter
 import sys
-# app = FastAPI()
 router=APIRouter()
 headerText = "M6nMjy5THr2J"
 
