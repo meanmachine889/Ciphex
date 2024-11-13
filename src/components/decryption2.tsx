@@ -33,7 +33,6 @@ export function Decryption1() {
     formData.append("password", key);
 
     try {
-      // Send the request to the backend
       const response = await fetch("http://localhost:8000/audio_txt/decode/", {
         method: "POST",
         body: formData,
@@ -52,12 +51,12 @@ export function Decryption1() {
   };
 
   return (
-    <div className="min-w-[80vw] h-[100%] pt-2">
+    <div className="w-[100%] h-[100%] pt-2">
       <div className="flex max-w-[90%] mt-2 bg-[#24182a] p-3 rounded-xl border border-[#5f476b] text-[#9d83ab]">
-        To decode a hidden message from an image, just choose an image and hit
+        To decode a hidden message from an audio, just choose an audio and hit
         the Decode button.
         <br />
-        Neither the image nor the message that has been hidden will be at any
+        Neither the audio nor the message that has been hidden will be at any
         moment transmitted over the web, all the magic happens within your
         browser.
       </div>

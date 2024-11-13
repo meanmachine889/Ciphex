@@ -57,11 +57,11 @@ export function Encryption1() {
   };
 
   return (
-    <div className="min-w-[80vw] h-[100%] pt-2">
-      <div className="flex max-w-[90%] mt-2 bg-[#24182a] p-3 rounded-xl border border-[#5f476b] text-[#9d83ab]">
-        To encode a message into an audio file, choose the file you want to use,
+    <div className="w-[100%] h-[100%] pt-2">
+      <div className="flex w-[100%] mt-2 bg-[#24182a] p-3 rounded-xl border border-[#5f476b] text-[#9d83ab]">
+        To encode a message into an video file, choose the file you want to use,
         enter your text and hit the Encode button.
-        <br /> Save the encrypted audio file; it will contain your hidden message.
+        <br /> Save the encrypted video file; it will contain your hidden message.
       </div>
       <Card className="w-full max-w-md border-gray-700 bg-[#151423] mt-5 border-none shadow-sm">
         <CardContent className="space-y-6 py-5 ">
